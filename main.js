@@ -29,3 +29,37 @@ function StartCount(el) {
     }
   }, 2000 / goal);
 }
+
+let countdownDate = new Date(
+  `Nov 18 , ${new Date().getFullYear()} 23:59:59`
+).getTime();
+let counter = setInterval(() => {
+  // Get DAte Now
+  let DateNow = new Date().getTime();
+  // Find the deference between the date Now And CountDownDate
+  let DifferDate = countdownDate - DateNow;
+  // let Years = Math.floor(DifferDate / (1000 * 60 * 60 * 24 * 365));
+  // let Days = Math.floor(
+  //   (DifferDate % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24)
+  // );
+  DifferDate < 0 ? d.setFullYear(new Date().getFullYear() + 1) : countdownDate;
+  const Days = Math.floor(DifferDate / (1000 * 60 * 60 * 24));
+  const Hours = Math.floor(
+    (DifferDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const Minutes = Math.floor((DifferDate % (1000 * 60 * 60)) / (1000 * 60));
+  const Seconds = Math.floor((DifferDate % (1000 * 60)) / 1000);
+  document.querySelector(
+    ".events .container .info .time .unit .days"
+  ).innerHTML = Days < 10 ? `0${Days}` : Days;
+  document.querySelector(
+    ".events .container .info .time .unit .hours"
+  ).innerHTML = Hours < 10 ? `0${Hours}` : Hours;
+  document.querySelector(
+    ".events .container .info .time .unit .minutes"
+  ).innerHTML = Minutes < 10 ? `0${Minutes}` : Minutes;
+  document.querySelector(
+    ".events .container .info .time .unit .seconds"
+  ).innerHTML = Seconds < 10 ? `0${Seconds}` : Seconds;
+  DifferDate--;
+}, 1000);
